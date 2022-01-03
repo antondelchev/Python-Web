@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from os import getenv
 from pathlib import Path
 
+import todos_app.access_info
+from todos_app import access_info
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,8 +78,12 @@ WSGI_APPLICATION = 'todos_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': todos_app.access_info.name,
+        'USER': todos_app.access_info.user,
+        'PASSWORD': todos_app.access_info.password,
+        'HOST': todos_app.access_info.host,
+        'PORT': todos_app.access_info.port,
     }
 }
 
