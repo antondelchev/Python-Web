@@ -20,8 +20,8 @@ class Category(models.Model):
     )
 
     name = models.CharField(
-        max_length=20,
-        choices=NAME_CHOICES
+        max_length=30,
+        choices=NAME_CHOICES,
     )
 
     def __str__(self):
@@ -32,9 +32,16 @@ class Category(models.Model):
 
 
 class Todo(models.Model):
-    text = models.CharField(max_length=28)
-    state = models.BooleanField(default=False)
-    description = models.TextField(null=True, blank=True)
+    text = models.CharField(
+        max_length=38,
+    )
+    state = models.BooleanField(
+        default=False,
+    )
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
     owner = models.ForeignKey(
         Person,
         on_delete=models.CASCADE,
