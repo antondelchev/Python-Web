@@ -12,4 +12,6 @@ from django101.tasks.models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'title')
+    list_filter = ('title',)
+    sortable_by = ('title',)

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress</title>
+</head>
+<body>
+<h1>Track your progress here</h1>
+<h2>{{ title }}</h2>
+{% if tasks %}
+    {% for name, completion in tasks_completion_and_names %}
+        <ul>
+            {{ name }}
+            {{ completion }}
+            <h4>--------</h4>
+        </ul>
+    {% endfor %}
+{% else %}
+    <h2>No tasks to show.</h2>
+{% endif %}
+</body>
+</html>
