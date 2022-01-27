@@ -6,6 +6,15 @@
 </head>
 <body>
 <h1>It works</h1>
+<h2>The number is {{ number }}</h2>
+<h2>The list of numbers is as follows:</h2>
+<ul>
+{% for number in numbers %}
+    <li>
+        Number {{ number }}.
+    </li>
+{% endfor %}
+</ul>
 <ol>
     <li>Fish</li>
     <li>Beef</li>

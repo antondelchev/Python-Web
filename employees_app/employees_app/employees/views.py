@@ -1,3 +1,5 @@
+import random
+
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
@@ -18,7 +20,12 @@ from django.shortcuts import render, redirect
 #     )
 
 def home(request):
-    return render(request, 'index.html')
+    context = {
+        'number': random.randint(0, 100),
+        'numbers': [random.randint(0, 100) for _ in range(3)],
+    }
+
+    return render(request, 'index.html', context)
 
 
 def not_found(request):
