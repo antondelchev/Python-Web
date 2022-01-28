@@ -34,7 +34,11 @@ def not_found(request):
 
 
 def go_to_home(request):
-    return redirect(to='/')
+    # return redirect(to='/') <--- hardcoded path
+    # return redirect(to='index')
+    # ^ path with named url (mapped path url to view)
+
+    return redirect('department details', id=random.randint(1, 9))
 
 
 def department_details(request, id):
@@ -42,6 +46,10 @@ def department_details(request, id):
         pass
 
     return HttpResponse(f'This is department {id}.')
+
+
+def create_department(request):
+    return HttpResponse('Created')
 
 
 def list_departments(request):
