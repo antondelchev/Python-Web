@@ -1,12 +1,30 @@
 from django.db import models
 
-
 # Create your models here.
+from django.urls import reverse
 
-class Department(models.Model):
+
+class AuditEntity(models.Model):
+    created_on = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated_on = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class Department(AuditEntity):
     name = models.CharField(
         max_length=30,
     )
+
+    def get_absolute_url(self):
+        return reverse('department details', kwargs={
+            'id': self.id,
+        })
 
 
 class Employee(models.Model):
@@ -49,10 +67,15 @@ class Employee(models.Model):
     )
 
     # one to many
-    department = models.ForeignKey(
-        Department,
-        on_delete=models.CASCADE,
-    )
+    # department = models.ForeignKey(
+    #     Department,
+    #     on_delete=models.CASCADE,
+    # )
+    def __str__(self):
+        return self.first_name
+
+    class Meta:
+        ordering = ('company', '-first_name',)
 
 
 class Project(models.Model):

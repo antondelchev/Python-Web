@@ -3,7 +3,6 @@ import random
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
-
 # Create your views here.
 
 # def home(request):
@@ -18,6 +17,8 @@ from django.shortcuts import render, redirect
 #             'x-current-header': 'Django',
 #         }
 #     )
+from employees_app.employees.models import Department, Employee
+
 
 def home(request):
     context = {
@@ -53,4 +54,20 @@ def create_department(request):
 
 
 def list_departments(request):
-    return HttpResponse('This is a list of all departments.')
+    # create new department on refresh/entering page:
+    # OPTION 1
+    department = Department(
+        name=f'Department {random.randint(1, 999)}',
+    )
+    department.save()  # <---- saves to the DB, thus creating the object
+    # OPTION 2
+    Department.objects.create(
+        name=f'Department {random.randint(1, 999)}',
+    )  # <--- saves automatically
+
+    context = {
+        'departments': Department.objects.prefetch_related('employee_set').all(),
+        'employees': Employee.objects.all(),
+        # 'employees': Employee.objects.filter(first_name__exact='Thomas'),
+    }
+    return render(request, 'list_departments.html', context)
