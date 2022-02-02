@@ -1,0 +1,43 @@
+{% load string_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>In: {{ title|capitalize }}</h1>
+<h1>Not in: {{ title2|default:'default value' }}</h1>
+<ul>
+    {% for employee in employees %}
+        <li>
+            {{ employee }}
+        </li>
+    {% endfor %}
+</ul>
+<div>
+    {% if num_1 < 200 %}
+        {{ num_1 }} < 200
+    {% elif num_1 == 200 %}
+        {{ num_1 }} is 200
+    {% else %}
+        {{ num_1 }} > 200
+    {% endif %}
+</div>
+<div>
+    {% for num in nums %}
+        <div>{{ num }}</div>
+    {% endfor %}
+</div>
+<div>
+    <ul>
+        {% for employee in employees %}
+            <li>
+                {{ employee.first_name }} - <strong>{{ employee.company }}</strong>
+                - <i>{{ employee.get_job_title_display }}</i>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
