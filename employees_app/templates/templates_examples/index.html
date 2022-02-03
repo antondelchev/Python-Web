@@ -1,3 +1,5 @@
+{% load employees_tags %}
+{% load int_filters %}
 {% load string_filters %}
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +40,16 @@
             </li>
         {% endfor %}
     </ul>
+</div>
+<div>
+    {{ num_1|increase_by:1000 }}
+
+</div>
+<h2>
+    Testing tags:
+</h2>
+<div>
+    {%  employees_list %}
 </div>
 </body>
 </html>
