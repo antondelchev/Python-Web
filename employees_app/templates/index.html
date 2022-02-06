@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>It works</h1>
-<ol>
-    <li>
-        <a href="{% url 'go to home' %}">Created go to homepage link.</a>
-    </li>
-    <li>
-        <a href="{% url 'templates index' %}">Go to templates</a>
-    </li>
-</ol>
+{% extends 'base/base.html' %}
 
-<h2>The number is {{ number }}</h2>
-<h2>The list of numbers is as follows:</h2>
-<ul>
-    {% for number in numbers %}
-        <li>
-            Number {{ number }}.
-        </li>
-    {% endfor %}
-</ul>
-<ol>
-    <li>Fish</li>
-    <li>Beef</li>
-    <li>Pork</li>
-</ol>
-</body>
-</html>
+{% block content %}
+
+    <h2>The number is {{ number }}</h2>
+    <h2>The list of numbers is as follows:</h2>
+    <ul>
+        {% for number in numbers %}
+            <li>
+                Number {{ number }}.
+            </li>
+        {% endfor %}
+    </ul>
+    <ol>
+        <li>Fish</li>
+        <li>Beef</li>
+        <li>Pork</li>
+    </ol>
+
+{% endblock %}

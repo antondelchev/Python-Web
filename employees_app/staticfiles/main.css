@@ -1,0 +1,12 @@
+/* loaded from path localhost:8000/static/main.css */
+h1 {
+    color: darkorange;
+}
+h2 {
+    color: darkolivegreen;
+}
+li {
+    color: seagreen;
+}
+
+html {background-color: black }

@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+<ol>
+    <li>
+        <a href="{% url 'go to home' %}">Created go to homepage link.</a>
+    </li>
+    <li>
+        <a href="{% url 'templates index' %}">Go to templates</a>
+    </li>
+</ol>
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>
