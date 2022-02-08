@@ -2,7 +2,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 # Create your models here.
-from petstagram.main.validators import only_letters_validator
+from petstagram.main.validators import validate_only_letters, validate_file_max_size_in_mb
 
 
 class Profile(models.Model):
@@ -22,7 +22,7 @@ class Profile(models.Model):
         max_length=FIRST_NAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(FIRST_NAME_MIN_LENGTH),
-            only_letters_validator,
+            validate_only_letters,
         )
     )
 
@@ -30,7 +30,7 @@ class Profile(models.Model):
         max_length=LAST_NAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(LAST_NAME_MIN_LENGTH),
-            only_letters_validator,
+            validate_only_letters,
         )
     )
 
@@ -109,3 +109,27 @@ class Pet(models.Model):
     # Meta
     class Meta:
         unique_together = ('user_profile', 'name')
+
+
+class PetPhoto(models.Model):
+    photo = models.ImageField(
+        # validators=validate_file_max_size_in_mb(5),
+    )
+
+    tagged_pets = models.ManyToManyField(
+        Pet,
+        # validate at least one pet,
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    publication_date = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    likes = models.IntegerField(
+        default=0,
+    )
