@@ -24,13 +24,17 @@ from employees_app.employees.models import Department, Employee
 class EmployeeForm(forms.Form):
     first_name = forms.CharField(
         max_length=30,
+        label='Enter first name',
     )
 
     last_name = forms.CharField(
         max_length=40,
     )
 
-    age = forms.IntegerField()
+    age = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(attrs={'type': 'range'}),
+    )
 
 
 def home(request):

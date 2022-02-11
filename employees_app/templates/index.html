@@ -1,20 +1,11 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+<h1>The Employees App</h1>
 
-    <h2>The number is {{ number }}</h2>
-    <h2>The list of numbers is as follows:</h2>
-    <ul>
-        {% for number in numbers %}
-            <li>
-                Number {{ number }}.
-            </li>
-        {% endfor %}
-    </ul>
-    <ol>
-        <li>Fish</li>
-        <li>Beef</li>
-        <li>Pork</li>
-    </ol>
-
+    <h3>Bound (Django) form</h3>
+    <form action=""> {# form --> mandatory #}
+        {{ employee_form }}
+    <button>Save/Create</button> {# we must add the button, Django only creates the input fields #}
+    </form>
 {% endblock %}
