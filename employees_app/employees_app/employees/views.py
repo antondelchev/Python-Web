@@ -1,6 +1,7 @@
 import random
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
@@ -21,6 +22,11 @@ from django.shortcuts import render, redirect
 from employees_app.employees.models import Department, Employee
 
 
+def validate_positive(value):
+    if value < 0:
+        raise ValidationError('value must be positive')
+
+
 class EmployeeForm(forms.Form):
     first_name = forms.CharField(
         max_length=30,
@@ -33,17 +39,34 @@ class EmployeeForm(forms.Form):
 
     age = forms.IntegerField(
         required=False,
-        widget=forms.TextInput(attrs={'type': 'range'}),
+        widget=forms.TextInput(
+            # attrs={'type': 'range'}
+        ),
+        validators=(
+            validate_positive,
+        )
     )
 
 
 def home(request):
-    context = {
-        'employee_form': EmployeeForm(),
-    }
+    return render(request, 'index.html')
 
-    return render(request, 'index.html', context)
 
+# standard get/post view:
+def create_employee(request):
+    if request.method == 'GET':
+        pass
+        # get/show form
+        context = {
+            'employee_form': EmployeeForm(),
+        }
+        return render(request, 'employees/create.html', context)
+    else:
+        # save info
+        employee_form = EmployeeForm(request.POST)
+        if employee_form.is_valid():
+            return redirect('index')
+        pass
 #
 # def not_found(request):
 #     return HttpResponseNotFound()

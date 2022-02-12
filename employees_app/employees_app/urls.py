@@ -23,4 +23,5 @@ urlpatterns = [
     # path('go-to-home/', go_to_home, name='go to home'),
     # path('departments/', include('employees_app.employees.urls')),
     # path('templates/', include('employees_app.template_examples.urls')),
+    path('employees/', include('employees_app.employees.urls')),
 ]
