@@ -1,9 +1,15 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<form method="post" action="{% url 'create employee' %}"> {# form --> mandatory #}
-    {{ employee_form }}
-    <button>Save/Create</button>
-    {# we must add the button, Django only creates the input fields #}
-</form>
+    <form method="post" action="{% url 'create employee' %}"> {# form --> mandatory #}
+        {{ employee_form }}
+        <button>Save/Create</button>
+        {# we must add the button, Django only creates the input fields #}
+
+        {#        <h3>Manual:</h3>>#}
+        {#        {{ employee_form.age.errors }}#}
+        {#        {% for err in employee_form.age.errors %}#}
+        {#            {{ err }}#}
+        {#        {% endfor %}#}
+    </form>
 {% endblock %}

@@ -53,20 +53,42 @@ def home(request):
 
 
 # standard get/post view:
+# def create_employee(request):
+#     if request.method == 'GET':
+#         pass
+#         # get/show form
+#         context = {
+#             'employee_form': EmployeeForm(),
+#         }
+#         return render(request, 'employees/create.html', context)
+#     else:
+#         # save info
+#         employee_form = EmployeeForm(request.POST)
+#         if employee_form.is_valid():
+#             return redirect('index')
+#
+#         context = {
+#             'employee_form': employee_form,
+#         }
+#         return render(request, 'employees/create.html', context)
+
+# ^ optimized same view:
 def create_employee(request):
-    if request.method == 'GET':
-        pass
-        # get/show form
-        context = {
-            'employee_form': EmployeeForm(),
-        }
-        return render(request, 'employees/create.html', context)
-    else:
-        # save info
+    if request.method == 'POST':
         employee_form = EmployeeForm(request.POST)
         if employee_form.is_valid():
             return redirect('index')
-        pass
+
+    else:
+        employee_form = EmployeeForm()
+
+    context = {
+        'employee_form': employee_form,
+    }
+
+    return render(request, 'employees/create.html', context)
+
+# -----------------------------------
 #
 # def not_found(request):
 #     return HttpResponseNotFound()
