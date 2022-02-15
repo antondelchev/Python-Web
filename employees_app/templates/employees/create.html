@@ -11,5 +11,15 @@
         {#        {% for err in employee_form.age.errors %}#}
         {#            {{ err }}#}
         {#        {% endfor %}#}
+
+        <div>
+            {% for field, errors in employee_form.errors.items %}
+                {{ field }}:
+                {% for error in errors %}
+                    {{ error }}
+                {% endfor %}
+            {% endfor %}
+
+        </div>
     </form>
 {% endblock %}
