@@ -27,25 +27,44 @@ def validate_positive(value):
         raise ValidationError('value must be positive')
 
 
-class EmployeeForm(forms.Form):
-    first_name = forms.CharField(
-        max_length=30,
-        label='Enter first name',
-    )
+# class EmployeeForm(forms.Form):
+#     first_name = forms.CharField(
+#         max_length=30,
+#         label='Enter first name',
+#     )
+# 
+#     last_name = forms.CharField(
+#         max_length=40,
+#     )
+# 
+#     age = forms.IntegerField(
+#         required=False,
+#         widget=forms.TextInput(
+#             # attrs={'type': 'range'}
+#         ),
+#         validators=(
+#             validate_positive,
+#         )
+#     )
 
-    last_name = forms.CharField(
-        max_length=40,
-    )
+class EmployeeForm(forms.ModelForm):
+    # age = forms.IntegerField(
+    #     validators=(
+    #         validate_positive,
+    #     )
+    # )
 
-    age = forms.IntegerField(
-        required=False,
-        widget=forms.TextInput(
-            # attrs={'type': 'range'}
-        ),
-        validators=(
-            validate_positive,
-        )
-    )
+    class Meta:
+        model = Employee
+        # fields = ('first_name', 'last_name', 'egn') or all of them:
+        fields = '__all__'
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            )
+        }
 
 
 def home(request):
@@ -77,6 +96,7 @@ def create_employee(request):
     if request.method == 'POST':
         employee_form = EmployeeForm(request.POST)
         if employee_form.is_valid():
+            employee_form.save()  # saves to DB
             return redirect('index')
 
     else:
