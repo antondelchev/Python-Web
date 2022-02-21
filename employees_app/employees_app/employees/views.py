@@ -67,6 +67,15 @@ class EmployeeForm(forms.ModelForm):
         }
 
 
+class EmployeeOrderForm(forms.Form):
+    order_by = forms.ChoiceField(
+        choices=(
+            ('first_name', 'First name'),
+            ('last_name', 'Last name'),
+        )
+    )
+
+
 def home(request):
     return render(request, 'index.html')
 
@@ -102,8 +111,14 @@ def create_employee(request):
     else:
         employee_form = EmployeeForm()
 
+    employee_order_form = EmployeeOrderForm(request.GET)
+    employee_order_form.is_valid()
+    order_by = employee_order_form.cleaned_data.get('order_by', 'first_name')
+
     context = {
         'employee_form': employee_form,
+        'employees': Employee.objects.order_by(order_by).all(),
+        'employee_order_form': employee_order_form,
     }
 
     return render(request, 'employees/create.html', context)

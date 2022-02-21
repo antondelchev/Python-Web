@@ -22,4 +22,26 @@
 
         </div>
     </form>
+
+    <form method="get" action="{% url 'create employee' %}">
+    {{ employee_order_form }}
+    <button>Order</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Job title</th>
+            <th>Company</th>
+        </tr>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.last_name }}</td>
+                <td>{{ employee.job_title }}</td>
+                <td>{{ employee.company }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
