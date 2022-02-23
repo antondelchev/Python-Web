@@ -123,6 +123,18 @@ def create_employee(request):
 
     return render(request, 'employees/create.html', context)
 
+
+def edit_employee(request, pk):
+    employee = Employee.objects.get(pk=pk)
+    employee_form = EmployeeForm(instance=employee)
+
+    context = {
+        'employee': employee,
+        'employee_form': employee_form,
+    }
+
+    return render(request, 'edit.html', context)
+
 # -----------------------------------
 #
 # def not_found(request):
