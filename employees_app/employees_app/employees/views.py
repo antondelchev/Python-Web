@@ -67,6 +67,19 @@ class EmployeeForm(forms.ModelForm):
         }
 
 
+# this is how to disable EGN field editing while editing current user's info
+# ------> when editing -> inherit the CREATE FORM (base creation of model) then edit stuff:
+class EditEmployeeForm(EmployeeForm):
+    class Meta:
+        model = Employee
+        fields = '__all__'
+        widgets = {
+            'egn': forms.TextInput(
+                attrs={'disabled': 'disabled'},
+            )
+        }
+
+
 class EmployeeOrderForm(forms.Form):
     order_by = forms.ChoiceField(
         choices=(
@@ -126,7 +139,14 @@ def create_employee(request):
 
 def edit_employee(request, pk):
     employee = Employee.objects.get(pk=pk)
-    employee_form = EmployeeForm(instance=employee)
+
+    if request.method == 'POST':
+        employee_form = EditEmployeeForm(request.POST, instance=employee)
+        if employee_form.is_valid():
+            employee_form.save()
+            return redirect('create employee')
+    else:
+        employee_form = EditEmployeeForm(instance=employee)
 
     context = {
         'employee': employee,
