@@ -53,6 +53,15 @@ class EmployeeForm(forms.ModelForm):
     #         validate_positive,
     #     )
     # )
+    bot_catcher = forms.CharField(
+        widget=forms.HiddenInput(),
+        required=False,
+    )
+
+    def clean_bot_catcher(self):
+        value = self.cleaned_data['bot_catcher']
+        if value:
+            raise ValidationError('This is a bot.')
 
     class Meta:
         model = Employee
@@ -70,12 +79,16 @@ class EmployeeForm(forms.ModelForm):
 # this is how to disable EGN field editing while editing current user's info
 # ------> when editing -> inherit the CREATE FORM (base creation of model) then edit stuff:
 class EditEmployeeForm(EmployeeForm):
+    # validating different fields:
+    # def clean(self):
+    #     pass
+
     class Meta:
         model = Employee
         fields = '__all__'
         widgets = {
             'egn': forms.TextInput(
-                attrs={'disabled': 'disabled'},
+                attrs={'readonly': 'readonly'},
             )
         }
 

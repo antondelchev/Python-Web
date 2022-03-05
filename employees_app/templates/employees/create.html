@@ -24,6 +24,7 @@
     </form>
 
     <form method="get" action="{% url 'create employee' %}">
+    {% csrf_token %}
     {{ employee_order_form }}
     <button>Order</button>
     </form>
