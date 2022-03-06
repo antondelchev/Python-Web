@@ -71,6 +71,13 @@ class Employee(models.Model):
     #     Department,
     #     on_delete=models.CASCADE,
     # )
+
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to='profiles'
+    )
+
     def __str__(self):
         return self.first_name
 

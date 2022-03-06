@@ -24,13 +24,14 @@
     </form>
 
     <form method="get" action="{% url 'create employee' %}">
-    {% csrf_token %}
-    {{ employee_order_form }}
-    <button>Order</button>
+        {% csrf_token %}
+        {{ employee_order_form }}
+        <button>Order</button>
     </form>
 
     <table>
         <tr>
+            <th>Profile photo</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Job title</th>
@@ -39,6 +40,11 @@
         </tr>
         {% for employee in employees %}
             <tr>
+                {% if employee.image %}
+                    <td><img height="50" src="{{ employee.image.url }}" alt="No profile photo uploaded."></td>
+                {% else %}
+                    {{ No image. }}
+                {% endif %}
                 <td>{{ employee.first_name }}</td>
                 <td>{{ employee.last_name }}</td>
                 <td>{{ employee.job_title }}</td>

@@ -2,9 +2,11 @@
 
 {% block content %}
     <h1>Edit {{ employee.first_name }}</h1>
-    <form action="{% url 'edit employee' employee.pk %}" method="post">
+    <form action="{% url 'edit employee' employee.pk %}"
+          method="post"
+          enctype="multipart/form-data">
         {% csrf_token %}
         {{ employee_form }}
-    <button>Edit</button>
+        <button>Edit</button>
     </form>
 {% endblock %}

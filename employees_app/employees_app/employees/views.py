@@ -154,7 +154,11 @@ def edit_employee(request, pk):
     employee = Employee.objects.get(pk=pk)
 
     if request.method == 'POST':
-        employee_form = EditEmployeeForm(request.POST, instance=employee)
+        employee_form = EditEmployeeForm(
+            request.POST,
+            request.FILES,
+            instance=employee,
+        )
         if employee_form.is_valid():
             employee_form.save()
             return redirect('create employee')
