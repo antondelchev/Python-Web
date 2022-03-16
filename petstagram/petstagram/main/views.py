@@ -21,6 +21,7 @@ def show_home(request):
 
 def show_dashboard(request):
     profile = get_profile()
+
     pet_photos = set(PetPhoto.objects
                      .prefetch_related('tagged_pets')
                      .filter(tagged_pets__user_profile=profile))
@@ -33,7 +34,7 @@ def show_dashboard(request):
 
 def show_profile(request):
     profile = get_profile()
-    
+
     pets = Pet.objects.filter(user_profile=profile)
     pet_photos = PetPhoto.objects.filter(tagged_pets__in=pets).distinct()
 
@@ -65,3 +66,35 @@ def like_pet_photo(request, pk):
     pet_photo.save()
 
     return redirect('pet_photo_details', pk)
+
+
+def create_profile(request):
+    return render(request, 'profile_create.html')
+
+
+def edit_profile(request):
+    return render(request, 'profile_edit.html')
+
+
+def delete_profile(request):
+    return render(request, 'profile_delete.html')
+
+
+def create_pet(request):
+    return render(request, 'pet_create.html')
+
+
+def edit_pet(request):
+    return render(request, 'pet_edit.html')
+
+
+def delete_pet(request):
+    return render(request, 'pet_delete.html')
+
+
+def create_pet_photo(request):
+    return render(request, 'photo_create.html')
+
+
+def edit_pet_photo(request):
+    return render(request, 'photo_edit.html')
