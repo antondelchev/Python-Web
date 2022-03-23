@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from petstagram.main.forms import ProfileForm
 from petstagram.main.helpers import get_profile
 from petstagram.main.models import Pet, PetPhoto
 
@@ -23,7 +24,15 @@ def show_profile(request):
 
 
 def create_profile(request):
-    return render(request, 'profile_create.html')
+    if request.method == 'POST':
+        pass
+    else:
+        form = ProfileForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'profile_create.html', context)
 
 
 def edit_profile(request):
