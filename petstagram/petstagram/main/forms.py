@@ -55,4 +55,15 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
                     'placeholder': 'Enter URL',
                 }
             ),
+            'email': forms.EmailInput(
+                attrs={
+                    'placeholder': 'Enter email',
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'placeholder': 'Enter description',
+                    'rows': 3,
+                }
+            )
         }
