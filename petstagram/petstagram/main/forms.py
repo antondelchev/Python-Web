@@ -60,6 +60,10 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
                     'placeholder': 'Enter email',
                 }
             ),
+            'gender': forms.ChoiceField(
+                choices=Profile.GENDERS,
+                initial=Profile.DO_NOT_SHOW,
+            ),
             'description': forms.Textarea(
                 attrs={
                     'placeholder': 'Enter description',
