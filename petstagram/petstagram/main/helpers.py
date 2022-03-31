@@ -16,7 +16,7 @@ class BootstrapFormMixin:
         for _, fields in self.fields.items():
             if not hasattr(fields.widget, 'attrs'):
                 setattr(fields.widget, 'attrs', {})
-                
+
             if 'class' not in fields.widget.attrs:
                 fields.widget.attrs['class'] = ''
 

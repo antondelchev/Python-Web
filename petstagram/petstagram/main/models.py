@@ -58,6 +58,7 @@ class Profile(models.Model):
         choices=GENDERS,
         null=True,
         blank=True,
+        default=DO_NOT_SHOW,
     )
 
     def __str__(self):

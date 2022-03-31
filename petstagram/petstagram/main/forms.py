@@ -35,6 +35,7 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
+        self.initial['gender'] = Profile.DO_NOT_SHOW
 
     class Meta:
         model = Profile
@@ -59,10 +60,6 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
                 attrs={
                     'placeholder': 'Enter email',
                 }
-            ),
-            'gender': forms.ChoiceField(
-                choices=Profile.GENDERS,
-                initial=Profile.DO_NOT_SHOW,
             ),
             'description': forms.Textarea(
                 attrs={
