@@ -66,5 +66,10 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
                     'placeholder': 'Enter description',
                     'rows': 3,
                 }
-            )
+            ),
+            'date_of_birth': forms.DateInput(
+                attrs={
+                    'min': '1920-01-01',
+                }
+            ),
         }
