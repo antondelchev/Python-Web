@@ -73,3 +73,10 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
                 }
             ),
         }
+
+
+class DeleteProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ()
+        # or --> exclude = ('first_name', 'last_name', 'gender', 'date_of_birth', 'picture', 'description', 'email')
