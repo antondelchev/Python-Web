@@ -1,7 +1,7 @@
 from django import forms
 
 from petstagram.main.helpers import BootstrapFormMixin
-from petstagram.main.models import Profile
+from petstagram.main.models import Profile, PetPhoto
 
 
 class CreateProfileForm(BootstrapFormMixin, forms.ModelForm):
@@ -76,6 +76,15 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class DeleteProfileForm(forms.ModelForm):
+    def save(self, commit=True):
+        pets = self.instance.pet_set.all()
+        pet_photos = PetPhoto.objects.filter(tagged_pets__in=pets)
+
+        self.instance.delete()
+        pet_photos.delete()
+
+        return self.instance
+
     class Meta:
         model = Profile
         fields = ()
