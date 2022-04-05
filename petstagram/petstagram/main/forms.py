@@ -1,7 +1,7 @@
 from django import forms
 
 from petstagram.main.helpers import BootstrapFormMixin
-from petstagram.main.models import Profile, PetPhoto
+from petstagram.main.models import Profile, PetPhoto, Pet
 
 
 class CreateProfileForm(BootstrapFormMixin, forms.ModelForm):
@@ -89,3 +89,16 @@ class DeleteProfileForm(forms.ModelForm):
         model = Profile
         fields = ()
         # or --> exclude = ('first_name', 'last_name', 'gender', 'date_of_birth', 'picture', 'description', 'email')
+
+
+class CreatePetForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = ('name', 'type', 'date_of_birth')
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter pet name'
+                }
+            ),
+        }
