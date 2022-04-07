@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from petstagram.main.forms import CreatePetForm
+from petstagram.main.forms import CreatePetForm, EditPetForm
 from petstagram.main.helpers import get_profile
 from petstagram.main.models import PetPhoto, Pet
 
@@ -24,9 +24,9 @@ def create_pet(request):
     return pet_action(request, CreatePetForm, 'profile details', Pet(user_profile=get_profile()), 'pet_create.html')
 
 
-def edit_pet(request):
-    return render(request, 'pet_edit.html')
+def edit_pet(request, pk):
+    return pet_action(request, EditPetForm, 'profile details', Pet.objects.get(pk=pk), 'pet_edit.html')
 
 
-def delete_pet(request):
+def delete_pet(request, pk):
     return render(request, 'pet_delete.html')
