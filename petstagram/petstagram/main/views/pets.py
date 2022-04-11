@@ -16,6 +16,7 @@ def pet_action(request, form_class, success_url, instance, template_name):
 
     context = {
         'form': form,
+        'pet': instance,
     }
     return render(request, template_name, context)
 
