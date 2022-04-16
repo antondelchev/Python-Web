@@ -116,3 +116,13 @@ class EditPetForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Pet
         exclude = ('user_profile',)
+
+
+class DeletePetForm(BootstrapFormMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = Pet
+        exclude = ('user_profile',)
