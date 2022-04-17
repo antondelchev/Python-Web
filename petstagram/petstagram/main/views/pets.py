@@ -30,4 +30,4 @@ def edit_pet(request, pk):
 
 
 def delete_pet(request, pk):
-    return pet_action(request, DeletePetForm, 'delete pet', Pet.objects.get(pk=pk), 'pet_delete.html')
+    return pet_action(request, DeletePetForm, 'profile details', Pet.objects.get(pk=pk), 'pet_delete.html')

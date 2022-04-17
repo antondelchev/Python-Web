@@ -1,6 +1,6 @@
 from django import forms
 
-from petstagram.main.helpers import BootstrapFormMixin
+from petstagram.main.helpers import BootstrapFormMixin, DisableFieldsFormMixin
 from petstagram.main.models import Profile, PetPhoto, Pet
 
 
@@ -118,10 +118,15 @@ class EditPetForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user_profile',)
 
 
-class DeletePetForm(BootstrapFormMixin, forms.ModelForm):
+class DeletePetForm(BootstrapFormMixin, DisableFieldsFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
+        self._init_disabled_fields()
+
+    def save(self, commit=True):
+        self.instance.delete()
+        return self.instance
 
     class Meta:
         model = Pet
