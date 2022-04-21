@@ -4,7 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 # Create your models here.
-from petstagram.main.validators import validate_only_letters, validate_file_max_size_in_mb
+from petstagram.main.validators import validate_only_letters, MinDateValidator
 
 
 class Profile(models.Model):
@@ -68,6 +68,7 @@ class Profile(models.Model):
 class Pet(models.Model):
     # constants
     NAME_MAX_LENGTH = 30
+    MIN_DATE = datetime.date(1920, 1, 1)
 
     CAT = 'Cat'
     DOG = 'Dog'
@@ -91,6 +92,9 @@ class Pet(models.Model):
     date_of_birth = models.DateField(
         null=True,
         blank=True,
+        validators=(
+            MinDateValidator(),
+        )
     )
 
     # one to one relations
