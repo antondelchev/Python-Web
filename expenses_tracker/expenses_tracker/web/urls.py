@@ -1,5 +1,8 @@
 from django.urls import path
 
+from expenses_tracker.web.views import show_index, create_expense, edit_expense, delete_expense, show_profile, \
+    edit_profile, delete_profile
+
 urlpatterns = [
     path('', show_index, name='show index'),
 
