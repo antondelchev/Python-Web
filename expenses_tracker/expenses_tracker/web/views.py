@@ -1,9 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
 
+def get_profile():
+    return None
+
+
 def show_index(request):
+    profile = get_profile()
+    if not profile:
+        return redirect('create profile')
+
     return render(request, 'home-with-profile.html')
 
 
@@ -24,7 +32,7 @@ def show_profile(request):
 
 
 def create_profile(request):
-    pass
+    return render(request, 'home-no-profile.html')
 
 
 def edit_profile(request):
