@@ -52,4 +52,17 @@ class Profile(models.Model):
 
 
 class Expense(models.Model):
-    pass
+    TITLE_MAX_LEN = 30
+
+    title = models.CharField(
+        max_length=TITLE_MAX_LEN,
+    )
+
+    image = models.URLField()
+
+    price = models.FloatField()
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
