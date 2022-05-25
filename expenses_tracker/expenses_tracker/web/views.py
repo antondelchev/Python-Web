@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from expenses_tracker.web.forms import CreateProfileForm
 from expenses_tracker.web.models import Profile
 
 
@@ -36,7 +37,12 @@ def show_profile(request):
 
 
 def create_profile(request):
-    return render(request, 'home-no-profile.html')
+    form = CreateProfileForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'home-no-profile.html', context)
 
 
 def edit_profile(request):
