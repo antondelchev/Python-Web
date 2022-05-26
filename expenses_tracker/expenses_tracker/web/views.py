@@ -37,7 +37,14 @@ def show_profile(request):
 
 
 def create_profile(request):
-    form = CreateProfileForm()
+    if request.method == 'POST':
+        form = CreateProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show index')
+    else:
+        form = CreateProfileForm()
+
     context = {
         'form': form,
     }
