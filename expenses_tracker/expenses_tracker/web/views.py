@@ -38,7 +38,7 @@ def show_profile(request):
 
 def create_profile(request):
     if request.method == 'POST':
-        form = CreateProfileForm(request.POST)
+        form = CreateProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('show index')
@@ -55,7 +55,7 @@ def create_profile(request):
 def edit_profile(request):
     profile = get_profile()
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=profile)
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('show index')

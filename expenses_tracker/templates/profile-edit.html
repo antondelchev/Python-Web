@@ -5,7 +5,7 @@
 
     <!-- Profile Edit Form -->
     <div class="form">
-        <form method="POST">
+        <form method="POST" action="{% url 'edit profile' %}" enctype="multipart/form-data">
             {#            <label for="budget">Budget:</label>#}
             {#            <input type="number" name="budget" value="1500" required="" id="budget">#}
             {##}
