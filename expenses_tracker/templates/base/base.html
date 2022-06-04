@@ -13,7 +13,10 @@
 <nav>
     <ul>
         <li class="img"><img src="/staticfiles/images/dollar.png" alt="dollar"></li>
-        <li><a href="#">Expenses Tracker</a></li>
+        <li><a href="{% url 'show index' %}">Expenses Tracker</a></li>
+        {% if not no_profile %}
+            <li class="right"><a href="{% url 'show profile' %}">Profile</a></li>
+        {% endif %}
     </ul>
 </nav>
 <!-- End Navigation Bar -->

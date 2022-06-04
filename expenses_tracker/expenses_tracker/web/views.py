@@ -47,6 +47,7 @@ def create_profile(request):
 
     context = {
         'form': form,
+        'no_profile': True,
     }
 
     return render(request, 'home-no-profile.html', context)
