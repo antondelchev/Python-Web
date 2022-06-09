@@ -33,7 +33,13 @@ def delete_expense(request, pk):
 
 
 def show_profile(request):
-    return render(request, 'profile.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile
+    }
+
+    return render(request, 'profile.html', context)
 
 
 def create_profile(request):
