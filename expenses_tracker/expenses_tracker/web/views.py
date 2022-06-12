@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from expenses_tracker.web.forms import CreateProfileForm, EditProfileForm
-from expenses_tracker.web.models import Profile
+from expenses_tracker.web.models import Profile, Expense
 
 
 def get_profile():
@@ -34,9 +34,15 @@ def delete_expense(request, pk):
 
 def show_profile(request):
     profile = get_profile()
+    expenses = Expense.objects.all()
+
+    expenses_count = len(expenses)
+    budget_left = profile.budget - sum(e.price for e in expenses)
 
     context = {
-        'profile': profile
+        'profile': profile,
+        'expenses_count': expenses_count,
+        'budget_left': budget_left,
     }
 
     return render(request, 'profile.html', context)
