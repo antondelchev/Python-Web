@@ -1,3 +1,5 @@
+import os
+
 from django import forms
 
 from expenses_tracker.web.models import Profile
@@ -18,8 +20,11 @@ class EditProfileForm(forms.ModelForm):
 class DeleteProfileForm(forms.ModelForm):
 
     def save(self, commit=True):
-        if commit:
-            self.instance.delete()
+        image_path = self.instance.image.path
+
+        self.instance.delete()
+        os.remove(image_path)
+        
         return self.instance
 
     class Meta:
